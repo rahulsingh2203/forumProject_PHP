@@ -1,10 +1,8 @@
-<?php 
-// Script to connect database
-$serverName = "localhost";
-$userName = "root";
+<?php
+// Script to connect to the database
+$servername = "localhost";
+$username = "root";
 $password = "";
 $database = "idiscuss";
-
-$conn = mysqli_connect($serverName, $userName, $password, $database);
-
+$conn = mysqli_connect($servername, $username, $password, $database);
 ?>
