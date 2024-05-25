@@ -8,18 +8,21 @@ $result = mysqli_query($conn, $sql1);
 //using while loop to iterate all data fetched using query in a structured way
 echo '<div class="row">';
 while ($row = mysqli_fetch_assoc($result)) {
-    $desc = substr($row['category_description'],0,90);
-    echo '
+  $desc = substr($row['category_description'], 0, 90);
+  $catid = $row['category_id'];
+  echo '
     <div class="col-md-3 mb-4">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body" style="background-color: #cefad0">
-        <h5 class="card-title"><b>' . $row['category_name'] . '</b></h5>
+    <div class="card" style="width: 18rem; background-color: #cefad0">
+      <div class="card-body" >
+        <h5 class="card-title"><b><a class="text-black"  href="threadList.php?catid=' . $catid . '">' . $row['category_name'] . '</a></b></h5>
         <p class="card-text">' . $desc . '...</p>
-        <a href="#" class="btn btn-success">View Threads</a>
+        <a href="threadList.php?catid=' . $catid . '" class="btn btn-success">View Threads</a>
       </div>
     </div>
     </div>
     ';
 }
 echo '</div>';
-?>
+
+
+
