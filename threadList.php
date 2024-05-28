@@ -37,22 +37,31 @@
             </ul>
         </div>
     </div>
-
-    <div class="container my-4 p-4 text-light">
-        <h2 class="mb-4">Start a Discussion!</h2>
-        <form action=<?php echo '"partials/addingThread.php?catid=' . $id . '"'; ?> method="POST">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label lead">Problem Title</label>
-                <input type="text" class="form-control" id="threadTitle" name="threadTitle" aria-describedby="emailHelp" style="background-color: #cefad0">
-                <div id="emailHelp" class="form-text text-light lead">Keep your title as short and crisp as possible.</div>
+    <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == True) {
+        echo '
+            <div class="container my-4 p-4 text-light">
+                <h2 class="mb-4">Start a Discussion!</h2>
+                <form action="partials/addingThread.php?catid=' . $id . '" method="POST">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label lead">Problem Title</label>
+                    <input type="text" class="form-control" id="threadTitle" name="threadTitle" aria-describedby="emailHelp" style="background-color: #cefad0">
+                    <div id="emailHelp" class="form-text text-light lead">Keep your title as short and crisp as possible.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label lead">Elaborate your concern</label>
+                        <textarea class="form-control" id="threadDesc" name="threadDesc" rows="3" style="background-color: #cefad0"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success lead">Submit!</button>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label lead">Elaborate your concern</label>
-                <textarea class="form-control" id="threadDesc" name="threadDesc" rows="3" style="background-color: #cefad0"></textarea>
-            </div>
-            <button type="submit" class="btn btn-success lead">Submit!</button>
-        </form>
-    </div>
+';
+    } else {
+        echo '
+        <div class="container my-4 text-light">
+            <h2 class="mb-0">Please login to start a Discussion!</h2>
+        </div>
+        ';
+    } ?>
 
     <div class="container my-4 p-4 text-light">
         <h2 class="mb-4">Browse Questions:</h2>
@@ -77,7 +86,7 @@
         }
         if ($noResult) {
             echo "<h2>No Threads Found...</h2>";
-            echo "<h5 class = 'lead'>Be the first person to ask question related to " . $catName . ".</h5>";
+            echo "<h5 class = 'lead'>Be the first person to start discussion related to " . $catName . ".</h5>";
         }
         ?>
     </div>

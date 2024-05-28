@@ -1,4 +1,5 @@
 <?php
+session_start();
 echo '
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -22,13 +23,28 @@ echo '
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
-      </ul>
+      </ul>';
+
+if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == True) {
+  //<h6 class="text-light">'. $_SESSION['userName'] .'</h6>
+  echo '
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="background-color: #cefad0">
         <button class="btn btn-success me-2" type="submit">Search</button>
-        <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
+        <a role="button" href="partials/_logout.php" class="btn btn-outline-success me-2">Logout</a>
       </form>
+        ';
+} else {
+  echo '
+  <form class="d-flex" role="search">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="background-color: #cefad0">
+  <button class="btn btn-success me-2" type="submit">Search</button>
+  <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+  <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
+</form>
+  ';
+}
+echo '
     </div>
   </div>
 </nav>
@@ -36,3 +52,15 @@ echo '
 
 include 'partials/_loginModal.php';
 include 'partials/_signupModal.php';
+/*
+if (isset($_GET['signupSuccess']) && $_GET['signupSuccess'] == "True") {
+  echo '<script>alert("Account created successfully!!"); </script>';
+} elseif (isset($_GET['signupSuccess']) && $_GET['signupSuccess'] == "False") {
+  $error = $_GET['error'];
+  echo '<script>alert("' . $error . '!!"); </script>';
+} elseif (isset($_GET['loginSuccess']) && $_GET['loginSuccess'] == "True") {
+  echo '<script>alert("Hello ' . $_SESSION['userName'] . '!!"); </script>';
+} elseif (isset($_GET['loginSuccess']) && $_GET['loginSuccess'] == "False") {
+  echo '<script>alert("Opps!! Unable to login"); </script>';
+}*/
+?>
