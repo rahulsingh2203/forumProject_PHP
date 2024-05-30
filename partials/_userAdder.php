@@ -7,6 +7,11 @@ if ($method == 'POST') {
     $userPassword = $_POST['signupPassword'];
     $userConfirmPassword = $_POST['signupConfirmPassword'];
 
+    $userName = str_replace("<", "&lt;", $userName);
+    $userEmail = str_replace("<", "&lt;", $userEmail);
+    $userPassword = str_replace("<", "&lt;", $userPassword);
+    $userConfirmPassword = str_replace("<", "&lt;",  $userConfirmPassword);
+
     // Check whether user exist or not
     $existSql = "SELECT * FROM `users` WHERE user_email = '$userEmail'";
     $result = mysqli_query($conn, $existSql);
@@ -22,11 +27,11 @@ if ($method == 'POST') {
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 $showResult = True;
-                header('location: ../index.php?signupSuccess=True');
+                header('location: /forum/index.php?signupSuccess=True');
             }
         } else {
             $showError = "Passwords does not match!!";
-            header('location: ../index.php?signupSuccess=False&error=' . $showError . '');
+            header('location: /forum/index.php?signupSuccess=False&error=' . $showError . '');
         }
     }
 }

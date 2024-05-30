@@ -14,13 +14,21 @@ echo '
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categories
+            Top Categories
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+          <ul class="dropdown-menu">';
+
+        $sql = "SELECT * FROM `categories` LIMIT 5";
+        $result = mysqli_query($conn,$sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+          $catid = $row['category_id'];
+        
+        echo '
+            <li><a class="text-black dropdown-item"  href="threadList.php?catid=' . $catid . '">' . $row['category_name'] . '</a></li>';
+        }
+         echo '
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="/forum">Explore Home for more Categories...</a></li>   
           </ul>
         </li>
       </ul>';
@@ -28,16 +36,16 @@ echo '
 if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == True) {
   //<h6 class="text-light">'. $_SESSION['userName'] .'</h6>
   echo '
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="background-color: #cefad0">
+      <form class="d-flex" role="search" action="/forum/partials/_search.php">
+        <input class="form-control me-2" type="search" name= "search" placeholder="Search" aria-label="Search" style="background-color: #cefad0">
         <button class="btn btn-success me-2" type="submit">Search</button>
-        <a role="button" href="partials/_logout.php" class="btn btn-outline-success me-2">Logout</a>
+        <a role="button" href="/forum/partials/_logout.php" class="btn btn-outline-success me-2">Logout</a>
       </form>
         ';
 } else {
   echo '
-  <form class="d-flex" role="search">
-  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="background-color: #cefad0">
+  <form class="d-flex" role="search" action="/forum/partials/_search.php">
+  <input class="form-control me-2" type="search" name= "search" placeholder="Search" aria-label="Search" style="background-color: #cefad0">
   <button class="btn btn-success me-2" type="submit">Search</button>
   <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
   <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
@@ -50,8 +58,8 @@ echo '
 </nav>
 ';
 
-include 'partials/_loginModal.php';
-include 'partials/_signupModal.php';
+include '_loginModal.php';
+include '_signupModal.php';
 /*
 if (isset($_GET['signupSuccess']) && $_GET['signupSuccess'] == "True") {
   echo '<script>alert("Account created successfully!!"); </script>';

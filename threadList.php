@@ -75,11 +75,21 @@
             $threadId = $row['thread_id'];
             $threadName = $row['thread_title'];
             $threadDesc = $row['thread_description'];
+            $threadUserId = $row['thread_user_id'];
+            $threadTimeStamp = $row['timestamp'];
+
+            $sql2 = "SELECT user_name FROM `users` WHERE user_id='$threadUserId'";
+            $result2 = mysqli_query($conn, $sql2);
+            $row2 = mysqli_fetch_assoc($result2);
+            $user = $row2['user_name'];
+
             echo '
             <div class="media my-3">
             <div class="media-body">
                 <h5 class="mt-0"><b><a class = "text-light" href = "thread.php?threadid=' . $threadId . '">' . $threadName . '</a></b></h5>
                 <p>' . $threadDesc . '</p>
+                <p><em> Posted by: ' . $user . ' at ' . $threadTimeStamp . '</em></p>
+                <hr>
             </div>
         </div>
             ';

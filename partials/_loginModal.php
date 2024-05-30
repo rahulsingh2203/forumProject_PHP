@@ -6,7 +6,7 @@
                 <h1 class="modal-title fs-5" id="loginModalLabel">Login to idiscuss forum</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="partials/_userLogin.php" method="POST">
+            <form action="/forum/partials/_userLogin.php" method="POST">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email:</label>

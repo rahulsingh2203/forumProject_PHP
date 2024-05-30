@@ -22,7 +22,7 @@
         <?php
         if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == True) {
             echo '
-        <h2 class="text-center pt-2 pb-2 text-light">Hello ' .  $_SESSION['userName'] . '!! Welcome to idiscuss - Browse Categories</h2>
+        <h2 class="text-center pt-2 pb-2 text-light">Hello ' .  $_SESSION['userName'] .  '!! Welcome to idiscuss - Browse Categories</h2>
         ';
         } else {
             echo '

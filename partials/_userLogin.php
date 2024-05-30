@@ -15,11 +15,12 @@ if ($method == 'POST') {
             session_start();
             $_SESSION['loggedIn'] = True;
             $_SESSION['userName'] = $row['user_name'];
-            header('location: ../index.php?loginSuccess=True');
+            $_SESSION['userId'] = $row['user_id'];
+            header('location: /forum/index.php?loginSuccess=True');
         } else {
-            header('location: ../index.php?loginSuccess=False');
+            header('location: /forum/index.php?loginSuccess=False');
         }
     }else {
-        header('location: ../index.php?loginSuccess=False');
+        header('location: /forum/index.php?loginSuccess=False');
     }
 }
